@@ -15,8 +15,6 @@ const  duplicaCards= [];
 let primeiroCard = '';
 let segundoCard = '';
 
-
-
 function iniciandoJogo(){
     while(true){
         qtde = +prompt("Com quantas cartas deseja jogar? (Digite somente números pares de 4 a 14)");
@@ -28,8 +26,7 @@ function iniciandoJogo(){
 
     while(qtde>i){
         duplicaCards.push(cards[i]);
-        i++;
-        
+        i++; 
     } 
 
     duplicaCards.sort(embaralhar);
@@ -39,8 +36,6 @@ function iniciandoJogo(){
         j++;
     }
 }
-
-
 
 function embaralhar(){
     return Math.random() - 0.5;
@@ -70,7 +65,6 @@ function criandoCartas(cards){
     
 }
 
-
 const cartas = document.querySelector('.cartas');
 
 function revelaCard ({ target })  {
@@ -96,8 +90,6 @@ function checkFinal(){
     if (cardVirado.length===qtde){
         alert(`Você ganhou em ${k} jogadas!`);
     }
-
-    
 }
 
 let k=1;
@@ -113,8 +105,6 @@ function checkCartas(){
         
         checkFinal();
         
-    
-
     } else if(primeiroid!==segundoid){
         setTimeout(comparar, 500);
     }
@@ -128,6 +118,7 @@ function comparar(){
     primeiroCard = '';
     segundoCard = '';
     }
+
 iniciandoJogo();
 
 
