@@ -9,10 +9,13 @@ const cards = [
     'back7', 'back7'
 
 ];
+let i=0;
+const  duplicaCards= [];
+let primeiroCard = '';
+let segundoCard = '';
 
-
-
-while(true){
+function iniciandoJogo(){
+    while(true){
         qtde = +prompt("Com quantas cartas deseja jogar? (Digite somente números pares de 4 a 14)");
     
         if(qtde<4 || qtde>14 || qtde%2 !==0)
@@ -20,11 +23,49 @@ while(true){
             else break;
     }
 
+    
+    while(qtde>i){
+        duplicaCards.push(cards[i], cards[i]);
+        
+        i++;
+        criandoCartas();
+    } 
+    duplicaCards.sort(embaralhar);
+    
+}
+
+
+
+function embaralhar(){
+    return Math.random() - 0.5;
+}
+
+function criandoCartas(){
+    
+    const card= document.createElement("div"); 
+    const front= document.createElement("div");
+    const back= document.createElement("div");
+   
+    card.classList.add("card");
+    front.classList.add("face", "front");
+    back.classList.add("face", "back");
+    
+    front.style.backgroundImage =`url(./img/back${i}.gif)`;    
+    card.appendChild(front);
+    card.appendChild(back);
+
+    cartas.appendChild(card);
+
+    card.addEventListener('click', revelaCard);
+
+    card.setAttribute('data-character', i);
+
+    return cartas;
+    
+}
+
 
 const cartas = document.querySelector('.cartas');
-
-let primeiroCard = '';
-let segundoCard = '';
 
 function revelaCard ({ target })  {
     if(target.parentNode.className.includes('revela-card')){
@@ -39,50 +80,28 @@ function revelaCard ({ target })  {
         segundoCard = target.parentNode;
     }
 
-    
+    checkCartas();
+
 }
 
-function criandoCartas(duplicaCards){
-    const card= document.createElement("div"); 
-    const front= document.createElement("div");
-    const back= document.createElement("div");
-   
-    card.classList.add("card");
-    front.classList.add("face", "front");
-    back.classList.add("face", "back");
+function checkCartas(){
+    const primeiroid = primeiroCard.getAttribute('data-character');
+    const segundoid = segundoCard.getAttribute('data-character');
 
-    front.style.backgroundImage =`url(./img/${duplicaCards[i]}.gif)`;    
-    card.appendChild(front);
-    card.appendChild(back);
-
-    cartas.appendChild(card);
-
-    card.addEventListener('click', revelaCard);
-    return cartas;
-    
-}
-
-let i=0;
-
-const  duplicaCards= [];
-
-function iniciandoJogo(){
-   
-    while(qtde>i){
-        duplicaCards.push(cards[i]);
-        criandoCartas(duplicaCards);
-        i++;
+    if(primeiroid !== segundoid){
+        setTimeout(comparar, 500);
     } 
-    duplicaCards.sort(embaralhar);
-    
-    console.log(duplicaCards);
 }
 
-function embaralhar(){
-    return Math.random() - 0.5;
-}
+function comparar(){
+    primeiroCard.classList.remove('revela-card');
+    segundoCard.classList.remove('revela-card');
 
+    primeiroCard = '';
+    segundoCard = '';
+    }
 iniciandoJogo();
+
 
 
 
