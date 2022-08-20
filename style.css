@@ -1,0 +1,88 @@
+@import url('https://fonts.googleapis.com/css2?family=Righteous&family=Roboto:wght@100;300;400;500;700&display=swap');
+
+body{
+    background-color: #eef9bf;
+    font-family: 'Roboto', sans-serif;
+}
+
+*{
+    box-sizing: border-box;
+    
+}
+
+
+h1 {
+    text-align: center;
+    margin: 50px;
+    font-size: 56px;
+    font-weight: 700;
+    line-height: 66px;
+    color: #75B79E;
+}
+
+
+.cartas {
+    margin: 0 15vw;
+    margin-bottom: 64px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 45px;
+    justify-content: center;
+}
+
+
+
+.card{
+    background-color: #75B79E;
+    border: 1px solid #99CEA8;
+    border-radius: 5px;
+    height: 146px;
+    width: 117px;
+    position: relative;
+   
+    transition: all 500ms ease;
+    transform-style: preserve-3d;
+
+}
+
+.face {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-size:cover;
+    background-position: center;
+    border: 1px solid #99CEA8;
+    backface-visibility: hidden;
+   
+}
+
+.front {
+    
+    transform: rotateY(180deg);
+    background-size: cover;
+    background-position: center;
+}
+
+
+.back {
+    background-image: url(./img/front.png);
+    background-size: cover;
+    background-position: center;
+    backface-visibility: hidden;
+    
+}
+
+.revela-card {
+    transform: rotateY(180deg);
+}
+
+img{
+    width: 100%;
+    
+}
+
+@media (max-width: 640px){
+    h1{
+        font-size:36px;
+    }
+}
