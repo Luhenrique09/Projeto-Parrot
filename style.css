@@ -81,6 +81,10 @@ img{
     
 }
 
+.okay{
+    
+}
+
 @media (max-width: 640px){
     h1{
         font-size:36px;

@@ -10,9 +10,12 @@ const cards = [
 
 ];
 let i=0;
+let=j=0;
 const  duplicaCards= [];
 let primeiroCard = '';
 let segundoCard = '';
+
+
 
 function iniciandoJogo(){
     while(true){
@@ -23,15 +26,18 @@ function iniciandoJogo(){
             else break;
     }
 
-    
     while(qtde>i){
-        duplicaCards.push(cards[i], cards[i]);
-        
+        duplicaCards.push(cards[i]);
         i++;
-        criandoCartas();
+        
     } 
+
     duplicaCards.sort(embaralhar);
-    
+   
+    while(qtde>j){
+        criandoCartas(duplicaCards);
+        j++;
+    }
 }
 
 
@@ -40,7 +46,7 @@ function embaralhar(){
     return Math.random() - 0.5;
 }
 
-function criandoCartas(){
+function criandoCartas(cards){
     
     const card= document.createElement("div"); 
     const front= document.createElement("div");
@@ -50,7 +56,7 @@ function criandoCartas(){
     front.classList.add("face", "front");
     back.classList.add("face", "back");
     
-    front.style.backgroundImage =`url(./img/back${i}.gif)`;    
+    front.style.backgroundImage =`url(./img/${cards[j]}.gif)`;    
     card.appendChild(front);
     card.appendChild(back);
 
@@ -58,7 +64,7 @@ function criandoCartas(){
 
     card.addEventListener('click', revelaCard);
 
-    card.setAttribute('data-character', i);
+    card.setAttribute('data-character', cards[j]);
 
     return cartas;
     
@@ -84,13 +90,35 @@ function revelaCard ({ target })  {
 
 }
 
+function checkFinal(){
+    const cardVirado = document.querySelectorAll('.okay');
+
+    if (cardVirado.length===qtde){
+        alert(`Você ganhou em ${k} jogadas!`);
+    }
+
+    
+}
+
+let k=1;
 function checkCartas(){
     const primeiroid = primeiroCard.getAttribute('data-character');
     const segundoid = segundoCard.getAttribute('data-character');
 
-    if(primeiroid !== segundoid){
+    if(primeiroid === segundoid){
+        primeiroCard.classList.add('okay');
+        segundoCard.classList.add('okay');
+        primeiroCard = '';
+        segundoCard = '';
+        
+        checkFinal();
+        
+    
+
+    } else if(primeiroid!==segundoid){
         setTimeout(comparar, 500);
-    } 
+    }
+    k++;
 }
 
 function comparar(){
